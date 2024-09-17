@@ -135,12 +135,12 @@ namespace exmath::statistics
     value_type m_x_sqr = 0.0f;
   };
 
-  BatchStatistics operator+(BatchStatistics const& lhs, BatchStatistics const& rhs) noexcept
+  inline BatchStatistics operator+(BatchStatistics const& lhs, BatchStatistics const& rhs) noexcept
   {
     BatchStatistics ret{ lhs };
     return ret(rhs);
   }
-  BatchStatistics& operator+=(BatchStatistics& lhs, BatchStatistics const& rhs) noexcept { return lhs(rhs); }
+  inline BatchStatistics& operator+=(BatchStatistics& lhs, BatchStatistics const& rhs) noexcept { return lhs(rhs); }
 }    // namespace exmath::statistics
 
 #endif
