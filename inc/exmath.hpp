@@ -3,5 +3,6 @@
 #define EXMATH_HPP_INCLUDED
 
 #include <exmath-statistics.hpp>
+#include <exmath-intervals.hpp>
 
 #endif
