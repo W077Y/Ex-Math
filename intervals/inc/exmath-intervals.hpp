@@ -20,23 +20,23 @@ namespace exmath::intervals
   template <typename T> class Interval_Interface
   {
   public:
-    using value_type     = std::remove_cvref_t<T>;
-    using Interval_Types = Interval_Types;
+    using value_type = std::remove_cvref_t<T>;
+    using Type       = Interval_Types;
 
     virtual ~Interval_Interface() = default;
 
-    virtual value_type     get_left_value() const noexcept                  = 0;
-    virtual value_type     get_right_value() const noexcept                 = 0;
-    virtual Interval_Types get_type() const noexcept                        = 0;
-    virtual bool           includes(value_type const& value) const noexcept = 0;
-    virtual value_type     saturate(value_type const& value) const noexcept = 0;
+    virtual value_type get_left_value() const noexcept                  = 0;
+    virtual value_type get_right_value() const noexcept                 = 0;
+    virtual Type       get_type() const noexcept                        = 0;
+    virtual bool       includes(value_type const& value) const noexcept = 0;
+    virtual value_type saturate(value_type const& value) const noexcept = 0;
   };
 
   template <typename T, Interval_Types type> class Interval: public Interval_Interface<T>
   {
   public:
-    using value_type     = std::remove_cvref_t<T>;
-    using Interval_Types = Interval_Types;
+    using value_type = std::remove_cvref_t<T>;
+    using Type       = Interval_Types;
 
     constexpr Interval(value_type const& lhs, value_type const& rhs) noexcept
         : m_left(lhs)
@@ -44,17 +44,17 @@ namespace exmath::intervals
     {
     }
 
-    constexpr value_type     get_left_value() const noexcept override { return this->m_left; }
-    constexpr value_type     get_right_value() const noexcept override { return this->m_right; }
-    constexpr Interval_Types get_type() const noexcept override { return type; }
+    constexpr value_type get_left_value() const noexcept override { return this->m_left; }
+    constexpr value_type get_right_value() const noexcept override { return this->m_right; }
+    constexpr Type       get_type() const noexcept override { return type; }
 
     constexpr bool includes(value_type const& value) const noexcept override
     {
-      if constexpr (type == Interval_Types::open)
+      if constexpr (type == Type::open)
         return Interval::check_open(this->m_left, this->m_right, value);
-      else if constexpr (type == Interval_Types::left_open)
+      else if constexpr (type == Type::left_open)
         return Interval::check_open_closed(this->m_left, this->m_right, value);
-      else if constexpr (type == Interval_Types::right_open)
+      else if constexpr (type == Type::right_open)
         return Interval::check_closed_open(this->m_left, this->m_right, value);
       else
         return Interval::check_closed(this->m_left, this->m_right, value);
