@@ -4,5 +4,6 @@
 
 #include <exmath-statistics.hpp>
 #include <exmath-intervals.hpp>
+#include <exmath-polynominal.hpp>
 
 #endif

@@ -1,0 +1,42 @@
+#pragma once
+#ifndef EXMATH_POLYNOMINAL_HPP_INCLUDED
+#define EXMATH_POLYNOMINAL_HPP_INCLUDED
+
+#include <cmath>
+#include <cstdint>
+#include <limits>
+#include <span>
+
+namespace exmath::polynominal
+{
+  template <typename T, std::size_t N> class polynominal_t
+  {
+    using value_type = T;
+
+  public:
+    polynominal_t() = default;
+
+    template <typename... U>
+    polynominal_t(U&&... args)
+        : m_para{ args... }
+    {
+    }
+
+    value_type operator()(value_type const& value) const& noexcept
+    {
+      value_type tmp = this->m_para[0];
+      for (std::size_t i = 1; i < this->m_para.size(); i++)
+      {
+        tmp *= value;
+        tmp += this->m_para[i];
+      }
+      return tmp;
+    }
+
+  private:
+    std::array<value_type, N + 1> m_para = {};
+  };
+
+}    // namespace exmath::polynominal
+
+#endif
