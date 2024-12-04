@@ -11,6 +11,8 @@ message(STATUS "    -> EXMATH-Comp:")
 add_subdirectory("${CMAKE_CURRENT_LIST_DIR}/statistics")
 add_subdirectory("${CMAKE_CURRENT_LIST_DIR}/intervals")
 add_subdirectory("${CMAKE_CURRENT_LIST_DIR}/polynominal")
+add_subdirectory("${CMAKE_CURRENT_LIST_DIR}/constants")
+add_subdirectory("${CMAKE_CURRENT_LIST_DIR}/blas")
 message(STATUS "########################")
 
 
@@ -27,6 +29,8 @@ target_link_libraries(${target_name}
  PUBLIC EXMATH_STATISTICS
  PUBLIC EXMATH_INTERVALS
  PUBLIC EXMATH_POLYNOMINAL
+ PUBLIC EXMATH_CONSTANTS
+ PUBLIC EXMATH_BLAS
 )
 
 
