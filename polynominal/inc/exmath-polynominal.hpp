@@ -9,15 +9,15 @@
 
 namespace exmath::polynominal
 {
-  template <typename T, std::size_t N> class polynominal_t
+  template <typename T, std::size_t Order> class polynominal_t
   {
     using value_type = T;
 
   public:
-    polynominal_t() = default;
+    constexpr polynominal_t() = default;
 
     template <typename... U>
-    polynominal_t(U&&... args)
+    constexpr polynominal_t(U&&... args)
         : m_para{ args... }
     {
     }
@@ -34,7 +34,7 @@ namespace exmath::polynominal
     }
 
   private:
-    std::array<value_type, N + 1> m_para = {};
+    std::array<value_type, Order + 1> m_para = {};
   };
 
 }    // namespace exmath::polynominal
