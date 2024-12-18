@@ -33,6 +33,9 @@ namespace exmath::polynominal
       return tmp;
     }
 
+    value_type& operator[](uint32_t const& idx) & noexcept { return this->m_para[idx]; }
+    value_type  operator[](uint32_t const& idx) const& noexcept { return this->m_para[idx]; }
+
   private:
     std::array<value_type, Order + 1> m_para = {};
   };
