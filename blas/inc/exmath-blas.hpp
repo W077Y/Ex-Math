@@ -566,6 +566,15 @@ namespace exmath
   {
     return Internal::matrix_solve<T, N, M>(lhs, rhs);
   }
+
+  template <typename T, index_t N> [[nodiscard]] constexpr matrix_t<T, N, N> inv(matrix_t<T, N, N> const& val)
+  {
+    exmath::matrix_t<T, N, N> rhs = {};
+    for (index_t i = 0; i < N; i++)
+      rhs(i, i) = T(1.0);
+
+    return Internal::matrix_solve<T, N, N>(val, rhs);
+  }
 }    // namespace exmath
 
 namespace std
