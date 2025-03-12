@@ -2,12 +2,13 @@
 #ifndef EXMATH_BLAS_HPP_INCLUDED
 #define EXMATH_BLAS_HPP_INCLUDED
 
+#include <concepts>
 #include <cstdint>
 #include <exmath-constants.hpp>
 
 namespace exmath
 {
-  using index_t = uint32_t;
+  using index_t = std::size_t;
 
   template <index_t N, index_t M> class matrix_size_t;
   template <typename T, index_t N, index_t M> class matrix_t;
@@ -84,6 +85,14 @@ namespace exmath
       matrix_t& self = *this;
       for (index_t j = 0; j < size_t::number_of_columns; ++j)
         self(row_a, j) -= self(row_b, j) * fac;
+    }
+
+    static consteval matrix_t<value_type, N, M> unit()
+    {
+      matrix_t<value_type, N, M> val = {};
+      for (std::size_t i = 0; i < N; i++)
+        val(i, i) = value_type{ 1.0 };
+      return val;
     }
 
   private:
