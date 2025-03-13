@@ -25,8 +25,10 @@ namespace exmath::intervals
 
     virtual ~Interval_Interface() = default;
 
-    virtual value_type get_left_value() const noexcept                  = 0;
-    virtual value_type get_right_value() const noexcept                 = 0;
+    virtual value_type get_left_value() const noexcept  = 0;
+    virtual value_type get_right_value() const noexcept = 0;
+    value_type         get_min_value() const noexcept { return this->get_left_value(); }
+    value_type         get_max_value() const noexcept { return this->get_right_value(); }
     virtual Type       get_type() const noexcept                        = 0;
     virtual bool       includes(value_type const& value) const noexcept = 0;
     virtual value_type saturate(value_type const& value) const noexcept = 0;
@@ -46,7 +48,8 @@ namespace exmath::intervals
 
     constexpr value_type get_left_value() const noexcept override { return this->m_left; }
     constexpr value_type get_right_value() const noexcept override { return this->m_right; }
-    constexpr Type       get_type() const noexcept override { return type; }
+
+    constexpr Type get_type() const noexcept override { return type; }
 
     constexpr bool includes(value_type const& value) const noexcept override
     {
